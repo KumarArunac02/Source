@@ -1,1 +1,1 @@
-Personal project Repository - Embedded Linux Driver Development
+Personal Repository - Embedded Linux Driver Development project
