@@ -1,1 +1,46 @@
-Personal Repository - Embedded Linux Driver Development project
+Personal Repository - Embedded Linux Driver Development on BeagleBoneBlack RevC
+
+Folder Structure:
+=================
+1) CustomDrivers - contains the drivers thats created apart from the drivers available in the Linux Distribution. (use if the module needs to be built Out of Tree)
+2) NewDriverLinuxDistri - contains the drivers that need to be put under the Linux Distribution and compiled. (use if the module needs to be built InTree)
+   -> Actually these files should be placed in Linux distribution thats Cloned or Downloaded from the Linux distribution for the BeagleBoneBlack Rev C through the official Repo https://github.com/beagleboard/linux.
+
+Compilation:
+============
+1) Setup the GCC cross compiler for ARM machines (https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/).
+2) Use the make commands to clean, define config file and compile
+
+STEP 1:
+/*
+ *removes all the temporary folder, object files, images generated during the previous build. 
+ *This step also deletes the .config file if created previously 
+ */
+make ARCH=arm distclean
+
+STEP 2:
+/*creates a .config file by using default config file given by the vendor */
+
+make ARCH=arm bb.org_defconfig
+
+
+STEP 3:
+/*This step is optional. Run this command only if you want to change some kernel settings before compilation */ ​
+
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
+
+
+STEP 4:
+/*Kernel source code compilation. This stage creates a kernel image "uImage" also all the device tree source files will be compiled, and dtbs will be generated */ ​
+
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage dtbs LOADADDR=0x80008000 -j4
+
+STEP 5:
+/*This step builds and generates in-tree loadable(M) kernel modules(.ko) */
+
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-  modules  -j4
+
+STEP 6:
+/* This step installs all the generated .ko files in the default path of the computer (/lib/modules/<kernel_ver>) */​
+
+sudo make ARCH=arm  modules_install
