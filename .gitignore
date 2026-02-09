@@ -1,0 +1,18 @@
+#
+# Leave the linux Distribution folder
+#
+/linux/
+
+#
+# Leave the generated Outfiles
+#
+.main*
+main.ko
+main.o
+main.mod*
+.Module*
+.modules*
+Module*
+modules*
+.built*
+built*

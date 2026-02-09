@@ -1,0 +1,4 @@
+menuconfig CUSTOM_HELLOWORLD
+config CUSTOM_HELLOWORLD
+    tristate "hello world module support"
+    default n
