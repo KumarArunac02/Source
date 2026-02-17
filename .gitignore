@@ -7,8 +7,11 @@
 # Leave the generated Outfiles
 #
 .main*
-main.ko
-main.o
+*.ko
+*.ko.*
+*.o
+*.mod*
+*.o.*
 main.mod*
 .Module*
 .modules*
